@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin & Luciana | Nuestra Unión Civil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Lienzo para pétalos y destellos dorados -->
+    <canvas id="petals"></canvas>
+
+    <!-- Barra de progreso dorada superior -->
+    <div id="scrollProgress"></div>
+
+    <!-- Notificación flotante (Toast) -->
+    <div id="luxuryToast">✓ Alias copiado al portapapeles</div>
+
+    <!-- Audio de fondo -->
+    <audio id="musica" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- SOBRE PREMIUM INTERACTIVO -->
+    <div id="overlay">
+        <div class="overlay-ambient-glow"></div>
+
+        <div class="invitation-letter" id="invitationLetter">
+            <!-- Reflejo satinado animado sobre el papel -->
+            <div class="paper-sheen"></div>
+
+            <div class="letter-inner-frame">
+                <!-- Ramita superior izquierda -->
+                <svg class="botanical-branch branch-top-left" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 110 C 35 70, 70 40, 110 15" stroke="#C5A059" stroke-width="1.3" stroke-linecap="round"/>
+                    <path d="M35 75 C 22 65, 20 50, 32 45 C 42 52, 42 66, 35 75 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M55 57 C 43 45, 43 30, 55 26 C 64 34, 63 48, 55 57 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M78 39 C 68 27, 70 14, 81 11 C 89 19, 86 32, 78 39 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M48 64 C 60 66, 72 60, 74 50 C 64 47, 54 53, 48 64 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M70 46 C 82 48, 94 42, 96 32 C 86 29, 76 35, 70 46 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                </svg>
+
+                <!-- Ramita inferior derecha -->
+                <svg class="botanical-branch branch-bottom-right" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 110 C 35 70, 70 40, 110 15" stroke="#C5A059" stroke-width="1.3" stroke-linecap="round"/>
+                    <path d="M35 75 C 22 65, 20 50, 32 45 C 42 52, 42 66, 35 75 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M55 57 C 43 45, 43 30, 55 26 C 64 34, 63 48, 55 57 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M78 39 C 68 27, 70 14, 81 11 C 89 19, 86 32, 78 39 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M48 64 C 60 66, 72 60, 74 50 C 64 47, 54 53, 48 64 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                    <path d="M70 46 C 82 48, 94 42, 96 32 C 86 29, 76 35, 70 46 Z" fill="#E8DCCB" stroke="#C5A059" stroke-width="1.1"/>
+                </svg>
+
+                <div class="envelope-header">
+                    <p>CELEBRACIÓN DE NUESTRA<br>UNIÓN CIVIL</p>
+                    <h1>KEVIN &<br>LUCIANA</h1>
+                    <div class="letter-monogram">KL</div>
+                </div>
+
+                <div class="seal-wrapper">
+                    <div class="seal-orbit"></div>
+                    <div class="seal-orbit-reverse"></div>
+                    <div class="seal" id="openInvitation" onclick="abrirInvitacion()">
+                        <span>K&L</span>
+                    </div>
+                </div>
+
+                <p class="touch-text">TOCA EL SELLO PARA ABRIR</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="contenido">
+        <header class="topbar" id="topbar">
+            <div class="logo">K & L</div>
+            <nav class="nav-links">
+                <a href="#programa">Programa</a>
+                <a href="#ubicacion">Lugar</a>
+                <a href="#rsvp" class="nav-cta">Confirmar</a>
+            </nav>
+        </header>
+
+        <!-- PORTADA HERO -->
+        <section class="hero" id="heroSection">
+            <div class="hero-bg" id="heroBg"></div>
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <div class="watermark">KL</div>
+
+                    <p class="hero-kicker hero-anim" style="--d: 0.2s;">NUESTRA BODA CIVIL</p>
+                    <h1 class="hero-anim" style="--d: 0.45s;">
+                        KEVIN
+                        <span class="gold-shimmer-text">&</span>
+                        LUCIANA
+                    </h1>
+
+                    <p class="subtitle hero-anim" style="--d: 0.7s;">28 DE NOVIEMBRE DE 2026</p>
+                    <p class="hero-place hero-anim" style="--d: 0.85s;">Guelcöm</p>
+                    <div class="hero-line hero-anim" style="--d: 1s;"></div>
+
+                    <!-- DISCO DE PORTADA -->
+                    <div id="musicPlayer" class="hero-anim" style="--d: 1.15s;" title="Tocar para pausar / reproducir">
+                        <div class="vinyl-halo">
+                            <div id="vinyl">
+                                <div class="vinyl-center"></div>
+                            </div>
+                        </div>
+                        <span id="musicLabel">
+                            <span class="eq-bars" id="heroEq">
+                                <i></i><i></i><i></i>
+                            </span>
+                            23 · Morat
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTRODUCCIÓN + NOTA CÓMPLICE -->
+        <section class="intro reveal">
+            <div class="card">
+                <span class="section-kicker stagger">EL GRAN DÍA</span>
+                <h2 class="stagger">Nuestra Unión Civil</h2>
+
+                <div class="luxury-divider stagger"><span>❦</span></div>
+
+                <p class="stagger">
+                    Con inmensa alegría celebramos el comienzo de una nueva etapa en nuestras vidas. 
+                    Deseamos compartir contigo este momento tan especial y construir juntos un recuerdo inolvidable.
+                </p>
+
+                <div class="playful-note stagger">
+                    <span class="note-ornament">❦</span>
+                    <p>
+                        “Sabemos que faltan muy pocos días y que, fieles a nuestro estilo, lo estamos avisando casi a último momento… 
+                        ¡pero ya nos conoces y sabes perfectamente cómo somos! Lo importante es que no podías faltar.”
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUENTA REGRESIVA -->
+        <section class="countdown reveal">
+            <span class="section-kicker stagger">CADA SEGUNDO CUENTA</span>
+            <h2 class="stagger">Cuenta Regresiva</h2>
+
+            <div class="count-grid stagger">
+                <div class="count-box">
+                    <span id="days">00</span>
+                    <label>Días</label>
+                </div>
+                <div class="count-box">
+                    <span id="hours">00</span>
+                    <label>Horas</label>
+                </div>
+                <div class="count-box">
+                    <span id="minutes">00</span>
+                    <label>Minutos</label>
+                </div>
+                <div class="count-box">
+                    <span id="seconds">00</span>
+                    <label>Segundos</label>
+                </div>
+            </div>
+
+            <div class="calendar-action stagger">
+                <a class="button button-outline" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Civil+Kevin+%26+Luciana&dates=20261128T201500Z/20261129T030000Z&details=Celebraci%C3%B3n+de+nuestra+Uni%C3%B3n+Civil+en+Guelc%C3%B6m.&location=Guelc%C3%B6m">
+                    📅 Agendar en mi Calendario
+                </a>
+            </div>
+        </section>
+
+        <!-- UBICACIÓN -->
+        <section class="location reveal" id="ubicacion">
+            <div class="card">
+                <span class="section-kicker stagger">COORDENADAS</span>
+                <h2 class="stagger">Ubicación</h2>
+                <div class="luxury-divider stagger"><span>❦</span></div>
+                <h3 class="stagger">Guelcöm</h3>
+
+                <p class="stagger">
+                    Un espacio único donde celebraremos uno de los días más importantes de nuestras vidas.
+                </p>
+
+                <div class="stagger">
+                    <a class="button" target="_blank" href="https://maps.app.goo.gl/8EgAWibWRzybYc1fA?g_st=ic">
+                        Ver Ubicación
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CRONOGRAMA -->
+        <section class="timeline reveal" id="programa">
+            <div class="card wedding-program">
+                <span class="program-kicker stagger">NUESTRA CELEBRACIÓN</span>
+                <h2 class="program-title stagger">Programa del Evento</h2>
+                <p class="program-date stagger">28 • NOVIEMBRE • 2026</p>
+
+                <p class="program-intro stagger">
+                    Cada instante de nuestra celebración ha sido pensado para compartirlo con quienes forman parte de nuestra historia.
+                </p>
+
+                <div class="timeline-wrapper" id="timelineWrapper">
+                    <div class="timeline-progress-line" id="timelineLine"></div>
+                    <div class="program-floral">❦</div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">17:15 hs</span>
+                        <div class="program-marker">🥂</div>
+                        <span class="program-title-event">Recepción de Invitados</span>
+                    </div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">18:00 hs</span>
+                        <div class="program-marker">💍</div>
+                        <span class="program-title-event">Inicio de la Ceremonia Civil</span>
+                    </div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">19:00 hs</span>
+                        <div class="program-marker">📸</div>
+                        <span class="program-title-event">Retratos de los Recién Casados</span>
+                    </div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">19:30 hs</span>
+                        <div class="program-marker">🎻</div>
+                        <span class="program-title-event">Celebración, Música y Entretenimiento</span>
+                    </div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">21:30 hs</span>
+                        <div class="program-marker">🥂</div>
+                        <span class="program-title-event">Brindis & Cena</span>
+                    </div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">22:00 hs</span>
+                        <div class="program-marker">🍰</div>
+                        <span class="program-title-event">Mesa Dulce</span>
+                    </div>
+
+                    <div class="timeline-entry stagger">
+                        <span class="program-hour">00:00 hs</span>
+                        <div class="program-marker">🤍</div>
+                        <span class="program-title-event">Cierre de la Celebración</span>
+                    </div>
+
+                    <div class="program-floral">❦</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VESTIMENTA (SOLO BLANCO RESERVADO) -->
+        <section class="dresscode reveal">
+            <div class="card">
+                <span class="section-kicker stagger">DRESS CODE</span>
+                <h2 class="stagger">Código de Vestimenta</h2>
+                <div class="luxury-divider stagger"><span>❦</span></div>
+                <h3 class="stagger">Formal Elegante</h3>
+
+                <p class="stagger">
+                    Queremos que todos luzcan radiantes y cómodos para disfrutar juntos una velada inolvidable. 
+                    Puedes elegir el color y estilo que más te guste.
+                </p>
+
+                <p class="notice stagger">
+                    Reservamos el color blanco exclusivamente para la novia.
+                </p>
+            </div>
+        </section>
+
+        <!-- VALOR DE TARJETA -->
+        <section class="ticket-section reveal">
+            <div class="card">
+                <span class="section-kicker stagger">ORGANIZACIÓN</span>
+                <h2 class="stagger">Contribución para la Celebración</h2>
+
+                <div class="ticket-price stagger">
+                    <span>$15.000</span>
+                    <p>Por persona</p>
+                </div>
+
+                <p class="stagger">
+                    Para acompañarnos en la organización de este día tan especial, 
+                    el valor de la tarjeta es de $15.000 por persona.
+                </p>
+            </div>
+        </section>
+
+        <!-- REGALOS / ALIAS -->
+        <section class="gift-section reveal">
+            <div class="card">
+                <span class="section-kicker stagger">OBSEQUIOS</span>
+                <h2 class="stagger">Nuestro Nuevo Hogar</h2>
+                <div class="luxury-divider stagger"><span>❦</span></div>
+
+                <p class="stagger">
+                    Lo más valioso para nosotros es compartir este día junto a quienes queremos.
+                </p>
+                <p class="stagger">
+                    Si además deseas acompañarnos con una contribución para comenzar esta nueva etapa 
+                    y construir nuestro hogar, podrás hacerlo de manera totalmente libre y voluntaria.
+                </p>
+
+                <div class="alias-box stagger">
+                    <h3>Alias</h3>
+                    <div class="luxury-alias" id="aliasText">KEVIN.LUCIANA.BODA</div>
+                    <button id="copyBtn" onclick="copyAlias()">Copiar Alias</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUESTRO PROPÓSITO -->
+        <section class="gallery-section reveal">
+            <div class="story-header">
+                <span class="section-kicker stagger">NUESTRO PROPÓSITO</span>
+                <h2 class="stagger">Un Amor Guiado por Dios</h2>
+                <div class="luxury-divider stagger"><span>❦</span></div>
+                <p class="story-text stagger">
+                    Cada paso que dimos hasta llegar aquí lleva la huella de la fidelidad y el amor de Dios. 
+                    Él unió nuestros caminos en el tiempo perfecto, sostuvo nuestra historia y hoy bendice nuestro hogar 
+                    para caminar juntos por el resto de nuestras vidas.
+                </p>
+                <blockquote class="bible-verse stagger">
+                    “Uno solo puede ser vencido, pero dos pueden resistir. ¡La cuerda de tres hilos no se rompe fácilmente!”
+                    <span>— Eclesiastés 4:12</span>
+                </blockquote>
+            </div>
+
+            <div class="gallery" id="photoGallery">
+                <div class="gallery-item stagger" data-index="0" onclick="abrirFoto(0)">
+                    <img src="foto-portada.jpg" alt="Foto principal" loading="lazy">
+                    <div class="gallery-zoom-badge" aria-hidden="true">⤢</div>
+                    <div class="gallery-caption"><span>El comienzo de nuestro para siempre</span></div>
+                </div>
+
+                <div class="gallery-item stagger" data-index="1" onclick="abrirFoto(1)">
+                    <img src="foto-beso.jpg" alt="Foto galería" loading="lazy">
+                    <div class="gallery-zoom-badge" aria-hidden="true">⤢</div>
+                    <div class="gallery-caption"><span>Promesas que nacen del corazón</span></div>
+                </div>
+
+                <div class="gallery-item stagger" data-index="2" onclick="abrirFoto(2)">
+                    <img src="foto-anillo.jpg" alt="Foto anillo" loading="lazy">
+                    <div class="gallery-zoom-badge" aria-hidden="true">⤢</div>
+                    <div class="gallery-caption"><span>Un compromiso bendecido</span></div>
+                </div>
+
+                <div class="gallery-item stagger" data-index="3" onclick="abrirFoto(3)">
+                    <img src="foto-galeria1.jpg" alt="Foto galería" loading="lazy">
+                    <div class="gallery-zoom-badge" aria-hidden="true">⤢</div>
+                    <div class="gallery-caption"><span>Caminando de la mano</span></div>
+                </div>
+
+                <div class="gallery-item gallery-item-wide stagger" data-index="4" onclick="abrirFoto(4)">
+                    <img src="foto-galeria2.jpg" alt="Foto galería" loading="lazy">
+                    <div class="gallery-zoom-badge" aria-hidden="true">⤢</div>
+                    <div class="gallery-caption"><span>Listos para dar el sí</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONFIRMACIÓN DE ASISTENCIA -->
+        <section class="rsvp-section reveal" id="rsvp">
+            <div class="card">
+                <span class="section-kicker stagger">TU PRESENCIA ES IMPORTANTE</span>
+                <h2 class="stagger">Confirmar Asistencia</h2>
+                <div class="luxury-divider stagger"><span>❦</span></div>
+
+                <p class="stagger">
+                    Agradecemos confirmar tu asistencia antes del 
+                    <strong>16 de noviembre de 2026</strong>.
+                </p>
+
+                <form id="rsvpForm" class="stagger" onsubmit="enviarWhatsApp(event)">
+                    <input type="text" id="nombre" placeholder="Nombre y apellido" required>
+                    <input type="tel" id="telefono" placeholder="Teléfono" required>
+
+                    <select id="cantidad">
+                        <option value="1 Persona">1 Persona</option>
+                        <option value="2 Personas">2 Personas</option>
+                        <option value="3 Personas">3 Personas</option>
+                        <option value="4 Personas">4 Personas</option>
+                    </select>
+
+                    <textarea id="mensaje" placeholder="Mensaje para los novios (opcional)"></textarea>
+
+                    <button type="submit" class="button">Confirmar por WhatsApp</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p class="footer-monogram">K & L</p>
+            <h2>Kevin & Luciana</h2>
+            <p class="footer-date">28 de Noviembre de 2026 • Guelcöm</p>
+
+            <div class="footer-line"></div>
+
+            <p class="footer-closing">
+                Gracias por acompañarnos en uno de los días más importantes de nuestras vidas.
+            </p>
+            <h3 class="footer-esperamos">¡Te esperamos!</h3>
+        </footer>
+    </main>
+
+    <!-- REPRODUCTOR FLOTANTE MEJORADO QUE APARECE AL BAJAR -->
+    <div id="floatingPlayer" title="Pausar / Reproducir música">
+        <div class="floating-vinyl-ring">
+            <div id="floatingVinyl">
+                <div class="vinyl-center"></div>
+            </div>
+        </div>
+        <div class="floating-info">
+            <div class="floating-title-row">
+                <span id="floatingLabel">23 · Morat</span>
+                <span class="eq-bars" id="floatingEq">
+                    <i></i><i></i><i></i><i></i>
+                </span>
+            </div>
+            <span id="floatingStatus" class="floating-status">Sonando ahora</span>
+        </div>
+    </div>
+
+    <!-- VISOR DE FOTOS PROFESIONAL E INTUITIVO (LIGHTBOX GALERÍA) -->
+    <div id="lightbox" onclick="cerrarFotoDesdeFondo(event)">
+        <div class="lightbox-topbar">
+            <span id="lightboxCounter">1 / 5</span>
+            <button type="button" class="lightbox-close" onclick="cerrarFoto()" aria-label="Cerrar">&times;</button>
+        </div>
+
+        <button type="button" class="lightbox-nav lightbox-prev" onclick="cambiarFoto(-1)" aria-label="Foto anterior">&#10094;</button>
+
+        <div class="lightbox-stage" id="lightboxStage">
+            <img id="lightboxImg" src="" alt="Vista ampliada">
+        </div>
+
+        <button type="button" class="lightbox-nav lightbox-next" onclick="cambiarFoto(1)" aria-label="Siguiente foto">&#10095;</button>
+
+        <div class="lightbox-footer">
+            <p id="lightboxCaption"></p>
+            <div class="lightbox-dots" id="lightboxDots"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
